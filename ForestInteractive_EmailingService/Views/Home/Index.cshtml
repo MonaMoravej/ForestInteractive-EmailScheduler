@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@*class="jumbotron"*@
+<div>
+    <br />
+    <h3>Welcom to <a href="http://www.forest-interactive.com/">Forest Interactive</a> scheduling service</h3>
+    <br />
+    <div class="row">
+        <div class="col-md-6 ">
+            <div class="jumbotron">
+                <p style="font-size:medium"> Schedule a new email to be sent to a list of recipients <br /><br />@Html.ActionLink("Schedule a New Email", "Create", "EmailSchedule", null, new { @class = "btn btn-info" })</p>
+            </div>
+        </div>
+        <div class="col-md-6  ">
+            <div class="jumbotron">
+                <p style="font-size:medium"> View and manage currently scheduled emails <br /><br />@Html.ActionLink("List of scheduled emails", "Index", "EmailSchedule", null, new { @class = "btn btn-default" }) </p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>

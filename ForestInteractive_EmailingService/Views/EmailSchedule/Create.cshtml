@@ -1,0 +1,141 @@
+﻿@model ForestInteractive_EmailingService.Models.EmailScheduleViewModel
+
+@{
+    ViewBag.Title = "Schedule a New Email";
+}
+
+<h2>Schedule a New Email</h2>
+
+
+@using (Html.BeginForm("Create", "EmailSchedule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form">
+        <h4>To schedule a new email, please fill the form.</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="row">
+
+            <div class="form-group col-md-3">
+
+                <div class="checkbox-inline" style="vertical-align: inherit;">
+                    @Html.EditorFor(model => model.SendingNow)
+                    @Html.ValidationMessageFor(model => model.SendingNow, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.SendingNow, htmlAttributes: new { @class = "control-label " })
+
+
+
+            </div>
+
+            <div class="form-group col-md-3">
+
+                @Html.LabelFor(model => model.SendDate, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.SendDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SendDate, "", new { @class = "text-danger" })
+
+
+            </div>
+
+            <div class="form-group col-md-3">
+
+
+                @Html.LabelFor(model => model.SendTime, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.SendTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SendTime, "", new { @class = "text-danger" })
+
+
+
+            </div>
+
+            <div class="form-group col-md-3">
+
+                @Html.LabelFor(model => model.Recipients, htmlAttributes: new { @class = "control-label " })
+                <input type="file" name="RecipientsFile" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Recipients, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-3">
+
+                <div class="checkbox-inline" style="vertical-align: inherit;">
+                    @Html.EditorFor(model => model.UseMyEmail)
+                    @Html.ValidationMessageFor(model => model.UseMyEmail, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.UseMyEmail, htmlAttributes: new { @class = "control-label  " })
+
+
+
+            </div>
+            <div class="form-group col-md-3">
+
+                @Html.LabelFor(model => model.FromEmail, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.FromEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FromEmail, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.EmailSubject, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.EmailSubject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailSubject, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+
+                    @Html.LabelFor(model => model.EmailBody, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.TextAreaFor(model => model.EmailBody, new { @class = "form-control", @cols = 12, @rows = 2 })
+
+                    @Html.ValidationMessageFor(model => model.EmailBody, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                    <div class="col-md-offset-9 col-md-1">
+                        <input type="submit" value="Create" class="btn btn-info" data-confirm="We are going to save the information of this file into the database. Are you ok with that ?" />
+                    </div>
+                </div>
+             
+              
+
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/EmailSchedule")
+
+}
+<script>
+    var EmailUser = '@(ViewBag.UserEmail)';
+
+</script>

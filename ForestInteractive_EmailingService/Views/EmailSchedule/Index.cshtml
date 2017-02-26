@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ForestInteractive_EmailingService.Models.EmailScheduleViewModel>
+
+@{
+    ViewBag.Title = "List of Scheduled Emails";
+
+}
+
+<h2>List of Scheduled Emails</h2>
+
+<p>
+    @Html.ActionLink("Schedule a New Email", "Create", null, new { @class = "btn btn-info" })
+
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">
+            @(ViewBag.Message)
+        </div>
+    }
+
+
+
+
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FromEmail)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.EmailSubject)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.SendDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SendTime)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.EmailBody)
+        </th>
+
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td title="@item.FromEmail">
+
+                @(item.FromEmail.Length <= 25 ? item.FromEmail : (item.FromEmail.Substring(0, 20) + "..."))
+
+            </td>
+            <td title="@item.EmailSubject">
+                @(item.EmailSubject.Length <= 40 ? item.EmailSubject : (item.EmailSubject.Substring(0, 35) + "..."))
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SendDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SendTime)
+            </td>
+
+
+            <td title="@item.EmailBody">
+
+                @(item.EmailBody.Length <= 30 ? item.EmailBody : (item.EmailBody.Substring(0, 25) + "..."))
+
+            </td>
+
+            <td>
+                @if (item.SendTime > DateTime.Now)
+                {
+                    @Html.ActionLink("Cancel", "Cancel", new { id = item.Id }, new { @class = "btn btn-danger" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

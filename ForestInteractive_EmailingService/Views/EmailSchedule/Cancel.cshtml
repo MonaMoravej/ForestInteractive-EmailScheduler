@@ -1,0 +1,66 @@
+﻿@model ForestInteractive_EmailingService.Models.EmailScheduleViewModel
+
+@{
+    ViewBag.Title = "Cancel";
+}
+
+<h2>Cancel</h2>
+
+<h3>Are you sure you want to cancel this?</h3>
+<div>
+    <h4>Schedule Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailSubject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailSubject)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SendDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SendDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SendTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SendTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailBody)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailBody)
+        </dd>
+
+
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            <input type="submit" value="Cancel" class="btn btn-danger" />
+        </div>
+    }
+</div>
