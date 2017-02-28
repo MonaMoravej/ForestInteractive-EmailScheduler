@@ -20,11 +20,11 @@ namespace ForestInteractive_EmailingService.Models
                 //sample user
                 var userToInsert = new ApplicationUser
                 {
-                    //Email = "sujeevan@forest-interactive.com",
-                    //UserName = "sujeevan@forest-interactive.com",
+                    Email = "sujeevan@forest-interactive.com",
+                    UserName = "sujeevan@forest-interactive.com",
 
-                    Email = "mona.moravej@gmail.com",
-                    UserName = "mona.moravej@gmail.com",
+                    //Email ="mona.moravej@gmail.com",
+                    //UserName="mona.moravej@gmail.com",
 
                     PasswordHash = password,
                     SecurityStamp = Guid.NewGuid().ToString()
