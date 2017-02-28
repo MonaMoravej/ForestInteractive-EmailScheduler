@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestInteractive_EmailingService", "ForestInteractive_EmailingService\ForestInteractive_EmailingService.csproj", "{2465D4B4-E544-4ADF-B738-7C3BA6D0B801}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestInteractive_EmailingService.Test", "ForestInteractive_EmailingService.Test\ForestInteractive_EmailingService.Test.csproj", "{BC2C545A-906C-4C8D-B1CF-79D9F5AF2B0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2465D4B4-E544-4ADF-B738-7C3BA6D0B801}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2465D4B4-E544-4ADF-B738-7C3BA6D0B801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2465D4B4-E544-4ADF-B738-7C3BA6D0B801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC2C545A-906C-4C8D-B1CF-79D9F5AF2B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC2C545A-906C-4C8D-B1CF-79D9F5AF2B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC2C545A-906C-4C8D-B1CF-79D9F5AF2B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC2C545A-906C-4C8D-B1CF-79D9F5AF2B0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

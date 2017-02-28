@@ -1,6 +1,5 @@
-﻿$("#UseMyEmail").click(function (e) {
-    if (e.toElement.checked) {
-       
+﻿var checkUseMyMobile = function () {
+    if ($("#UseMyEmail").prop('checked')) {
         $("#FromEmail").val(EmailUser);
         $("#FromEmail").prop('readonly', true);
     }
@@ -8,10 +7,10 @@
         $("#FromEmail").val("");
         $("#FromEmail").prop('readonly', false);
     }
-});
+};
 
-$("#SendingNow").click(function (e) {
-    if (e.toElement.checked) {
+var checkSendingNow = function () {
+    if($("#SendingNow").prop('checked') ) {
         $("#SendDate").val("");
         $("#SendDate").prop('disabled', true);
         $("#SendTime").val("");
@@ -21,8 +20,17 @@ $("#SendingNow").click(function (e) {
         $("#SendDate").val("");
         $("#SendDate").prop('disabled', false);
         $("#SendTime").val("");
-        $("#SendTime").prop('disabled',false);
+        $("#SendTime").prop('disabled', false);
     }
+}
+checkUseMyMobile();
+checkSendingNow();
+$("#UseMyEmail").click(function (e) {
+    checkUseMyMobile();
+});
+
+$("#SendingNow").click(function (e) {
+    checkSendingNow();
 });
 
 $('[data-confirm]').click(function (e) {
@@ -30,3 +38,5 @@ $('[data-confirm]').click(function (e) {
         e.preventDefault();
     }
 });
+
+
