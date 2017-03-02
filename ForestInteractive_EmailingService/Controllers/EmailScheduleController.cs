@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -9,12 +7,12 @@ using System.Web.Mvc;
 using ForestInteractive_EmailingService.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
-using System.Linq.Expressions;
-using System.Reflection;
 using Hangfire;
 using System.Net.Mail;
 using System.Configuration;
 using System.IO;
+using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace ForestInteractive_EmailingService.Controllers
 {
@@ -67,20 +65,43 @@ namespace ForestInteractive_EmailingService.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(EmailScheduleViewModel emailScheduleViewModel)
         {
+           
+            byte[] recipients = null;
+            ViewBag.UserEmail = await GetUserInfo(u => u.Email);
+
             if (Request.Files.Count == 0 || Path.GetExtension(Request.Files[0].FileName).ToLower() != ".csv")
-                ModelState.AddModelError("Recipients", "Choose a valid CSV file for recipients");
-            else if (ModelState.IsValid)
+            {
+                ModelState.AddModelError("Recipients", "Choose a valid CSV file.");
+
+            }
+
+            else
             {
                 using (var ms = new MemoryStream())
                 {
                     Request.Files[0].InputStream.CopyTo(ms);
-                    emailScheduleViewModel.Recipients = ms.ToArray();
+                    recipients = ms.ToArray();
                 }
-                EmailSchedule entity = await MapToEmailSchadle(emailScheduleViewModel);
+                var recipientsString = Encoding.UTF8.GetString(recipients).Replace("\r", "").Replace("\n", "").TrimEnd(',');
+                var emails = recipientsString.Split(',');
+                EmailAddressAttribute emailValidator = new EmailAddressAttribute();
+                foreach (var email in emails)
+                {
+                    if (!emailValidator.IsValid(email))
+                    {
+                        ModelState.AddModelError("Recipients", email + " is not an email. The format of file must be like this: exm@gmail.com, abc@yahoo.com, eg@y.net[,]");
+                        break;
 
+                    }
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                emailScheduleViewModel.Recipients = recipients;
+                EmailSchedule entity = await MapToEmailSchadle(emailScheduleViewModel);
                 if (!EmailScheduleISDuplicate(entity))
                 {
-
                     db.EmailSchedules.Add(entity);
                     db.SaveChanges();
                     try
@@ -101,6 +122,7 @@ namespace ForestInteractive_EmailingService.Controllers
             }
 
             return View(emailScheduleViewModel);
+
         }
 
 
@@ -125,6 +147,7 @@ namespace ForestInteractive_EmailingService.Controllers
         [NonAction]
         public void sendEmail(int id)
         {
+            //not found
             var schedule = db.EmailSchedules.Find(id);
 
             string recipients = "";
